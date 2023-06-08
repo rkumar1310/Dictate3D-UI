@@ -92,7 +92,7 @@ export const Common = ({ objects }: { objects: any }) => {
       {/* <ambientLight intensity={0.05} />
       <pointLight position={[20, 30, 10]} intensity={1} castShadow ref={point1Ref} /> */}
       {/* <pointLight position={[-10, -10, -10]} castShadow ref={point2Ref} /> */}
-      <Environment preset='warehouse' background blur={1} />
+      <Environment files='empty_warehouse_01_1k.hdr' background blur={1} />
       <ContactShadows {...shadowProps} />
       <PerspectiveCamera {...cameraProps} />
       <Selection>
