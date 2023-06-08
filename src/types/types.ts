@@ -3,9 +3,9 @@ import { Vector3 } from "@react-three/fiber";
 export interface Entity3DDetails {
     id: string;
     type: Entity3DType;
-    position: Vector3 | [number, number, number];
-    rotation: Vector3 | [number, number, number];
-    scale: Vector3 | [number, number, number];
+    position: number[];
+    rotation: number[];
+    scale: number[];
     animations: AnimationTypes[];
     color: string;
 }
