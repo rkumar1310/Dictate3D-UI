@@ -1,9 +1,10 @@
-import { Layout } from '@/components/dom/Layout'
-import '@/global.css'
+import React from 'react'
+import { Layout } from '../src/components/dom/Layout'
+import './global.css'
 
 export const metadata = {
-  title: 'Next.js + Three.js',
-  description: 'A minimal starter for Nextjs + React-three-fiber and Threejs.',
+  title: 'Dictate3D - AI 3D editor',
+  description: 'AI 3D editor that understands and applies your english commands.',
 }
 
 export default function RootLayout({ children }) {
