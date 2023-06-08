@@ -1305,6 +1305,11 @@
   resolved "https://registry.npmjs.org/@rushstack/eslint-patch/-/eslint-patch-1.2.0.tgz#8be36a1f66f3265389e90b5f9c9962146758f728"
   integrity sha512-sXo/qW2/pAcmT43VoRKOJbDOfV3cYpq3szSVfIThQXNt+E4DfKj361vaAt3c88U5tPUxzEswam7GW48PJqtKAg==
 
+"@studio-freight/lenis@^1.0.14":
+  version "1.0.14"
+  resolved "https://registry.yarnpkg.com/@studio-freight/lenis/-/lenis-1.0.14.tgz#f1557707bc99a252a4590df4314d28414cc2b402"
+  integrity sha512-tkKeh5UNylVMqxjItl3gBe0kEdOZil3392TCva1CPcsjvhvkC0sn1feHPAFRO3YmSzQUXCKJ3wjJL/lTaCDQmA==
+
 "@surma/rollup-plugin-off-main-thread@^2.2.3":
   version "2.2.3"
   resolved "https://registry.npmjs.org/@surma/rollup-plugin-off-main-thread/-/rollup-plugin-off-main-thread-2.2.3.tgz#ee34985952ca21558ab0d952f00298ad2190c053"

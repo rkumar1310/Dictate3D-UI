@@ -1,6 +1,6 @@
 import { HTMLAttributes } from 'react'
 
-var Chat = (props: HTMLAttributes<SVGElement>) => {
+const Chat = (props: HTMLAttributes<SVGElement>) => {
   return (
     <svg
       version='1.1'

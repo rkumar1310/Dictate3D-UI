@@ -21,6 +21,7 @@
     "@react-three/drei": "^9.70.0",
     "@react-three/fiber": "^8.12.0",
     "@react-three/postprocessing": "^2.14.7",
+    "@studio-freight/lenis": "^1.0.14",
     "glsl-random": "^0.0.5",
     "next": "^13.4.2",
     "react": "^18.2.0",

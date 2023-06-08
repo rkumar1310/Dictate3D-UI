@@ -1,6 +1,6 @@
 import { HTMLAttributes } from 'react'
 
-var Arrow = (props: HTMLAttributes<SVGElement>) => {
+const Arrow = (props: HTMLAttributes<SVGElement>) => {
   return (
     <svg
       version='1.1'

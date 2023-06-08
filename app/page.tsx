@@ -32,13 +32,21 @@ const View = dynamic(() => import('../src/components/canvas/View').then((mod) =>
 
 // Define a higher order component that wraps a dynamic component with context
 const withEditor3DContext = (DynamicComponent) => {
-  return (props) => (
+  const WithEditor3DContextComponent = (props) => (
     <Editor3DContext.Provider
       value={{ onClickObject: props.onClickObject, cameraRef: props.cameraRef, activeObjectId: props.activeObjectId }}
     >
       <DynamicComponent {...props} />
     </Editor3DContext.Provider>
   )
+
+  WithEditor3DContextComponent.displayName = `WithEditor3DContext(${getDisplayName(DynamicComponent)})`
+
+  return WithEditor3DContextComponent
+}
+
+function getDisplayName(WrappedComponent) {
+  return WrappedComponent.displayName || WrappedComponent.name || 'Component'
 }
 
 const Common = dynamic(() => import('../src/components/canvas/View').then((mod) => withEditor3DContext(mod.Common)), {
@@ -68,6 +76,7 @@ const TailwindSpinner = () => {
     </div>
   )
 }
+TailwindSpinner.displayName = 'TailwindSpinner'
 
 export default function Page() {
   const [showDialog, setShowDialog] = useState(true)
