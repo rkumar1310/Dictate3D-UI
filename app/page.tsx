@@ -11,9 +11,6 @@ import { CommandProps } from '../src/types/types'
 import { useContextBridge } from '@react-three/drei'
 import toast, { Toaster } from 'react-hot-toast'
 
-const Logo = dynamic(() => import('../src/components/canvas/Examples').then((mod) => mod.Logo), { ssr: false })
-const Dog = dynamic(() => import('../src/components/canvas/Examples').then((mod) => mod.Dog), { ssr: false })
-const Duck = dynamic(() => import('../src/components/canvas/Examples').then((mod) => mod.Duck), { ssr: false })
 const View = dynamic(() => import('../src/components/canvas/View').then((mod) => mod.View), {
   ssr: false,
   loading: () => (

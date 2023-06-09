@@ -29,7 +29,6 @@ import { AnimationTypes, Entity3DDetails, Entity3DType } from '../../types/types
 const cameraProps: any = { makeDefault: true, fov: 80, position: [0, 0, 6] }
 const shadowProps: any = { resolution: 1024, position: [0, -2, 0], opacity: 1, scale: 1000, blur: 4, far: 3 }
 const context = createContext<any>({})
-const Dog = dynamic(() => import('./Examples').then((mod) => mod.Dog), { ssr: false })
 
 function useHover() {
   const ref = useRef()
@@ -83,16 +82,9 @@ export const Common = ({ objects }: { objects: any }) => {
     editor3DContext.cameraRef.current = camera
   }, [camera, editor3DContext.cameraRef])
 
-  const point1Ref = useRef()
-  const point2Ref = useRef()
-
   return (
     <Suspense fallback={null}>
-      {/* {color && <color attach='background' args={[color]} />} */}
-      {/* <ambientLight intensity={0.05} />
-      <pointLight position={[20, 30, 10]} intensity={1} castShadow ref={point1Ref} /> */}
-      {/* <pointLight position={[-10, -10, -10]} castShadow ref={point2Ref} /> */}
-      <Environment files='empty_warehouse_01_1k.hdr' background blur={1} />
+      <Environment files='empty_warehouse_01_1k.hdr' background blur={2} />
       <ContactShadows {...shadowProps} />
       <PerspectiveCamera {...cameraProps} />
       <Selection>
@@ -106,13 +98,6 @@ export const Common = ({ objects }: { objects: any }) => {
             xRay={false}
             blendFunction={BlendFunction.ALPHA}
           />
-          {/* <SelectiveBloom
-            lights={[point1Ref, point2Ref]}
-            width={Resolution.AUTO_SIZE}
-            luminanceThreshold={0.2}
-            luminanceSmoothing={0.9}
-            blendFunction={BlendFunction.ALPHA}
-          /> */}
         </EffectComposer>
 
         {objects.map((objectDetails, index) => (
