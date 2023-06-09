@@ -154,6 +154,11 @@ export default function Page() {
                 className='text-lg grow outline-none w-full bg-gray-700 p-4 rounded-lg resize-none border border-gray-600 text-gray-300'
                 placeholder='ask me to do something..'
                 onChange={(e) => setCommand(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    processUserCommand()
+                  }
+                }}
                 value={command}
               ></textarea>
               <div
