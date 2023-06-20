@@ -11,8 +11,6 @@ import { CommandProps } from '../src/types/types'
 import { useContextBridge } from '@react-three/drei'
 import toast, { Toaster } from 'react-hot-toast'
 import { TypeAnimation } from 'react-type-animation'
-import Mic from '../src/components/icons/Mic'
-import { AudioRecorder } from 'react-audio-voice-recorder'
 
 const View = dynamic(() => import('../src/components/canvas/View').then((mod) => mod.View), {
   ssr: false,
