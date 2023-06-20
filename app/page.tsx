@@ -157,9 +157,9 @@ export default function Page() {
               </Suspense>
             </View>
           </ContextBridge>
-          <div className='absolute h-[calc(100dvh)] w-full z-100 top-0'>
+          <div className='absolute h-[calc(100dvh)] w-full z-100 top-0 pointer-events-none'>
             {showDialog && (
-              <div className='w-full md:w-96 absolute top-1/2 left-1/2 z-10  -translate-x-1/2  -translate-y-1/2 '>
+              <div className='w-full md:w-96 absolute top-1/2 left-1/2 z-10  -translate-x-1/2  -translate-y-1/2 pointer-events-auto'>
                 <div className='mx-2 box-border bg-gray-800  border-2 border-gray-900 p-8 shadow-lg rounded-lg text-center'>
                   <div className='relative'>
                     {hintEnabled && (
@@ -212,7 +212,7 @@ export default function Page() {
                 </div>
               </div>
             )}
-            <div className='absolute bottom-0 left-0 h-20 bg-gradient-to-t from-grey-500 z-10 w-full'>
+            <div className='absolute bottom-0 left-0 h-20 bg-gradient-to-t from-grey-500 z-10 w-full pointer-events-auto'>
               <div className='flex flex-row items-center justify-center gap-4'>
                 <div
                   className='w-12 h-12 shadow-lg bg-gray-200 rounded-lg text-center flex justify-center items-center border-2 border-white'
