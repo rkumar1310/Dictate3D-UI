@@ -11,6 +11,8 @@ import { CommandProps } from '../src/types/types'
 import { useContextBridge } from '@react-three/drei'
 import toast, { Toaster } from 'react-hot-toast'
 import { TypeAnimation } from 'react-type-animation'
+import Mic from '../src/components/icons/Mic'
+import { AudioRecorder } from 'react-audio-voice-recorder'
 
 const View = dynamic(() => import('../src/components/canvas/View').then((mod) => mod.View), {
   ssr: false,
@@ -92,6 +94,14 @@ export default function Page() {
     }
   }
 
+  const addAudioElement = (blob) => {
+    const url = URL.createObjectURL(blob)
+    const audio = document.createElement('audio')
+    audio.src = url
+    audio.controls = true
+    document.body.appendChild(audio)
+  }
+
   const processUserCommand = () => {
     const commandPromise = new Promise((resolve, reject) => {
       setShowDialog(false)
@@ -149,70 +159,76 @@ export default function Page() {
               </Suspense>
             </View>
           </ContextBridge>
-          {showDialog && (
-            <div className='absolute top-1/2 left-1/2 z-10 bg-gray-800  border-2 border-gray-900 p-8 -translate-x-1/2  -translate-y-1/2 shadow-lg rounded-lg text-center'>
-              <div className='relative'>
-                {hintEnabled && (
-                  <div className='absolute p-4 text-gray-400 text-left max-w-100 pointer-events-none'>
-                    <TypeAnimation
-                      sequence={[
-                        // Same String at the start will only be typed once, initially
-                        'Add a box',
-                        2000,
-                        'Give me four red spheres',
-                        2000,
-                        'Can I have 10 boxes',
-                        2000,
-                        'Add a light green ball',
-                        2000,
-                        'Make this bigger',
-                        2000,
-                        'Move this down by 10 meters',
-                      ]}
-                      speed={50}
-                      style={{ fontSize: '1em' }}
-                      repeat={Infinity}
-                    />
+          <div className='absolute h-[calc(100dvh)] w-full z-100 top-0'>
+            {showDialog && (
+              <div className='w-full md:w-96 absolute top-1/2 left-1/2 z-10  -translate-x-1/2  -translate-y-1/2 '>
+                <div className='mx-2 box-border bg-gray-800  border-2 border-gray-900 p-8 shadow-lg rounded-lg text-center'>
+                  <div className='relative'>
+                    {hintEnabled && (
+                      <div className='absolute p-4 text-gray-400 text-left max-w-100 pointer-events-none'>
+                        <TypeAnimation
+                          sequence={[
+                            // Same String at the start will only be typed once, initially
+                            'Add a box',
+                            2000,
+                            'Give me four red spheres',
+                            2000,
+                            'Can I have 10 boxes',
+                            2000,
+                            'Add a light green ball',
+                            2000,
+                            'Make this bigger',
+                            2000,
+                            'Move this down by 10 meters',
+                          ]}
+                          speed={50}
+                          style={{ fontSize: '1em' }}
+                          repeat={Infinity}
+                        />
+                      </div>
+                    )}
+                    <textarea
+                      id='message'
+                      rows={2}
+                      className='text-lg grow outline-none w-full bg-gray-700 p-4 rounded-lg resize-none border border-gray-600 text-gray-300'
+                      placeholder=''
+                      onChange={(e) => setCommand(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                          processUserCommand()
+                        }
+                      }}
+                      onFocus={() => showHint(false)}
+                      onBlur={(e) => e.target.value === '' && showHint(true)}
+                      value={command}
+                    ></textarea>
                   </div>
-                )}
-                <textarea
-                  id='message'
-                  rows={2}
-                  className='text-lg grow outline-none w-full bg-gray-700 p-4 rounded-lg resize-none border border-gray-600 text-gray-300'
-                  placeholder=''
-                  onChange={(e) => setCommand(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                      processUserCommand()
-                    }
-                  }}
-                  onFocus={() => showHint(false)}
-                  onBlur={(e) => e.target.value === '' && showHint(true)}
-                  value={command}
-                ></textarea>
+                  <div className='flex justify-center gap-4'>
+                    <div
+                      className='w-12 h-12 shadow-lg bg-gray-600 rounded-lg text-center flex justify-center items-center border-2 border-gray-700 mt-4'
+                      onClick={() => processUserCommand()}
+                    >
+                      <Arrow className='w-6 h-6 fill-white' />
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div
-                className='w-12 h-12 shadow-lg bg-gray-600 rounded-lg text-center flex justify-center items-center border-2 border-gray-700 mx-auto mt-4'
-                onClick={() => processUserCommand()}
-              >
-                <Arrow className='w-6 h-6 fill-white' />
-              </div>
-            </div>
-          )}
-          <div className='absolute bottom-0 left-0 h-20 bg-gradient-to-t from-grey-500 z-10 w-full'>
-            <div className='flex flex-row items-center justify-center'>
-              <div
-                className='w-12 h-12 shadow-lg bg-gray-200 rounded-lg text-center flex justify-center items-center border-2 border-white'
-                onClick={() => onTriggerButtonClick()}
-              >
-                {!isLoading ? (
-                  <>
-                    {showDialog && <Cross className='w-6 h-6 fill-gray-500' />}
-                    {!showDialog && <Chat className='w-6 h-6 fill-gray-500' />}
-                  </>
-                ) : (
-                  <TailwindSpinner />
-                )}
+            )}
+            <div className='absolute bottom-0 left-0 h-20 bg-gradient-to-t from-grey-500 z-10 w-full'>
+              <div className='flex flex-row items-center justify-center gap-4'>
+                <div
+                  className='w-12 h-12 shadow-lg bg-gray-200 rounded-lg text-center flex justify-center items-center border-2 border-white'
+                  onClick={() => onTriggerButtonClick()}
+                >
+                  {!isLoading ? (
+                    <>
+                      {showDialog && <Cross className='w-6 h-6 fill-gray-600' />}
+                      {!showDialog && <Chat className='w-6 h-6 fill-gray-600' />}
+                    </>
+                  ) : (
+                    <TailwindSpinner />
+                  )}
+                </div>
               </div>
             </div>
           </div>
